@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="card_roulette",
-    version="1.0.0",
+    version="1.1.0",
     author="Dhya El Bahri",
     author_email="dhya.bahri@icloud.com",
     description="A simple card game simulation called Card Roulette",

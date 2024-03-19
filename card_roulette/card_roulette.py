@@ -9,7 +9,7 @@ class CardRoulette:
     track scores for each player, and customize the number of players and rounds.
     '''
 
-    __version__ = '1.0.0'
+    __version__ = '1.1.0'
 
     def __init__(self, num_players: int | None = 3, num_rounds: int | None = 3):
         '''
