@@ -43,7 +43,7 @@ _Default settings: 5 games, 3 players, 3 rounds_
 python3 -m card_roulette simulate --games 10 --players 4 --rounds 2
 ```
 
-Results will be saved in the `results` folders like so:
+Results will be saved in the `results` folder like so:
 
 ```bash
 results/
