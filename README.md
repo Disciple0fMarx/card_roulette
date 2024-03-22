@@ -2,8 +2,6 @@
 
 A Python package that simulates a thrilling card game where players draw cards, hoping to avoid the deadly one.
 
----
-
 ## Description
 
 Card Roulette is a text-based game where players draw cards in rounds.
