@@ -1,4 +1,3 @@
-# simulate.py
 import argparse
 import csv
 import json
@@ -73,6 +72,59 @@ def save_game_results(
     with open(csv_filename, 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow([game_number] + game_scores)
+
+
+def save_accumulated_scores(csv_file_path: str, simulation_id: str, num_players: int, num_rounds: int) -> None:
+    """
+    Saves accumulated scores from a CSV file to results/total_results.json.
+
+    Args:
+        csv_file_path: The path to the CSV file containing the accumulated scores.
+        simulation_id: The ID of the simulation.
+        num_players: The number of players involved.
+        num_rounds: The number of rounds played.
+
+    Raises:
+        IOError: If there's an issue opening, reading, or writing the files.
+        ValueError: If there's an issue with parsing CSV data or serializing JSON data.
+    """
+    accumulated_scores: List[int] = [0] * num_players
+    num_games: int = 0
+
+    with open(csv_file_path, 'r') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        next(csv_reader)  # Skip header
+
+        for row in csv_reader:
+            scores = [int(score) for score in row[1:]]
+            for i, score in enumerate(scores):
+                accumulated_scores[i] += score
+            num_games += 1
+
+    total_results: Dict[str, Any] = {}
+    json_filename: str = os.path.join(RESULTS_DIR, "total_results.json")
+
+    if os.path.exists(json_filename):
+        with open(json_filename, 'r') as json_file:
+            total_results = json.load(json_file)
+
+    players_key: str = f"{num_players}_players"
+    rounds_key: str = f"{num_rounds}_rounds"
+
+    simulation_data: Dict[str, Any] = {
+        "simulation_id": simulation_id,
+        "num_games": num_games,
+        "scores": accumulated_scores
+    }
+
+    rounds_data = total_results.setdefault(players_key, {})
+    simulations = rounds_data.setdefault(rounds_key, [])
+    simulations.append(simulation_data)
+
+    with open(json_filename, 'w') as json_file:
+        json.dump(total_results, json_file, indent=4)
+
+    print("JSON data written successfully.")
 
 
 def save_total_results(num_players: int, num_rounds: int, total_results: JSON):

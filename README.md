@@ -2,12 +2,18 @@
 
 A Python package that simulates a thrilling card game where players draw cards, hoping to avoid the deadly one.
 
+---
+
 ## Description
 
 Card Roulette is a text-based game where players draw cards in rounds.
 Each round, players draw cards randomly, and if a player draws the deadly card, they lose the round.
 The game introduces a new deadly card with each iteration *(Iteration n's deadly card is card n)*.
 If the deadly card is the only one remaining, all players survive.
+
+## Rust Version
+
+You can find the Rust version [here](https://github.com/Disciple0fMarx/card_roulette_rust).
 
 ## Requirements
 
